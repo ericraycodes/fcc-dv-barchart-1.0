@@ -18,7 +18,10 @@ function visualizeData(data) {
 	const w = 900;
 	// scales
 	const xScale = d3.scaleLinear()
-		.domain(['1947', '2016'])
+		.domain([
+				d3.min(data, d => d[0].match(/[0-9]{4}/)[0]),
+				d3.max(data, d => parseFloat(d[0].match(/[0-9]{4}/)[0]) + 1)
+			])
 		.range([padding, w - padding]);
 	const yScale = d3.scaleLinear()
 		.domain([0, d3.max(data, d=>d[1])])
@@ -28,11 +31,17 @@ function visualizeData(data) {
 	const svgNode = d3.select("main").append("svg").attr("height", h).attr("width", w);
 	// axes
 	const xAxis = d3.axisBottom(xScale).tickFormat(year => year.toString());
-	svgNode.append("g").attr("transform", "translate(0, " + (h-padding) + ")").call(xAxis);
+	svgNode.append("g")
+		.attr("transform", `translate(${0}, ${h - padding})`)
+		.call(xAxis)
+		.attr("id", "x-axis");
 	const yAxis = d3.axisLeft(yScale);
-	svgNode.append("g").attr("transform", "translate( " + padding + ", 0)").call(yAxis);
+	svgNode.append("g")
+		.attr("transform", `translate(${padding}, 0)`)
+		.call(yAxis)
+		.attr("id", "y-axis");
 	// rectangular bar
-	svgNode.selectAll("rect").data(data).enter().append("rect");
+	// svgNode.selectAll("rect").data(data).enter().append("rect");
 
 }
 
