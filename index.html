@@ -10,14 +10,18 @@
     	>
     	<!-- title -->
     	<title>fCC: Bar Chart</title>
+    	<!-- The stylesheet and script files were pathed to accomodate
+    		github pages; especially the script, commonly would not be
+    		sourced inside a sub-folder. -->
     	<link rel='stylesheet' href='./assets/styles.css'>
-    	<script defer src='./assets/script.js'></script>
+    	<script defer src='./script.js'></script>
     	<!-- d3 cdn -->
-    	<script defer src="https://d3js.org/d3.v4.min.js"></script>
+    	<script  src="https://d3js.org/d3.v4.min.js"></script>
 	</head>
 	<body>
 		<main>
 			<h1 id='title'>United States GDP: 1947 - 2015</h1>
+			<div id='svg-container'></div>
 		</main>
 		<!-- fCC test suite -->
 		<script defer src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>

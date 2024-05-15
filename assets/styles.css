@@ -2,7 +2,7 @@
 
 /* initial ruls */
 * {
-	box-sizing: border-box;
+	box-sizing: content-box;
 	padding: 0;
 	margin: 0;
 }
@@ -20,14 +20,26 @@ body {
 
 /* chart */
 main {
-/*	border: 1px solid orange;*/
-	width: 1000px;
-	height: 550px;
+	padding: 40px 0px 0px 30px;
+	min-width: 400px;
+	min-height: 300px;
+
+	width: auto;
+	height: auto;
 	background-color: white;
 }
 h1 {
 	text-align: center;
 }
-/*svg rect {
-	color: blue;
-}*/
+#tooltip {
+	position: fixed;
+	height: auto;
+	width: auto;
+	background-color: whitesmoke;
+	text-align: center;
+	font-size: 0.9rem;
+	padding: 5px;
+}
+.bar:hover {
+	fill: blue;
+}

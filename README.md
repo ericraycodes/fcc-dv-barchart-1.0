@@ -12,10 +12,8 @@
   - **d3 environment**
 
 ## Data
-The **date** data is parsed into:
- - year
- - quarter
-- Convert *timestamp* into *Date*. [ref](https://www.influxdata.com/blog/how-get-convert-format-javascript-date-timestamp/#:~:text=One%20way%20to%20convert%20a,get%20the%20individual%20date%20components.)
+The stringed **date** data was converted into *Date* objects for d3 to process.
+This is the reference for visualizing **temporal dates** in this project: [reference](https://using-d3js.com/04_04_working_with_dates.html)
 
 ## SVG Chart
 - **Padding**, must be set for svgs to keep display within its borders, nothing is shown when outside.
@@ -23,13 +21,12 @@ The **date** data is parsed into:
 - **ticks** [ref](https://ghenshaw-work.medium.com/customizing-axes-in-d3-js-99d58863738b)
 
 ## D3 Library
-D3 works on all browsers except IE8 and lower.
-CDN [Reference](https://www.tutorialsteacher.com/d3js/setup-d3js-development-environment) 
+D3 works on all browsers except IE8 and lower. [Reference](https://www.tutorialsteacher.com/d3js/setup-d3js-development-environment).
 
-- d3 library to project:
+A `<script>` tag sources CDN link of the d3 library:
   ```
-  <script defer src="https://d3js.org/d3.v4.min.js"></script>`
+  <script defer src="https://d3js.org/d3.v4.min.js"></script>
   ```
-- axes,[reference](https://ghenshaw-work.medium.com/customizing-axes-in-d3-js-99d58863738b)
 
-- *temporal date* input, [ref](https://using-d3js.com/04_04_working_with_dates.html)
+## Responsive
+[reference](https://d3-graph-gallery.com/graph/custom_responsive.html)
