@@ -25,35 +25,39 @@ const getYearQuarter = (date) => {
 
 
 // CALLBACK: visualize data with d3 
-function visualizeData(data, height = 450, width = 900) {
+function visualizeData(data, height = 500, width = 950) {
 	// console
 	console.log('visualizing data...', data);
 
 	// chart dimension
 	const h = height;
 	const w = width;
-	const padding = 50;
+	const padTop = 20;
+	const padBottom = 100;
+	const padLeft = 80;
+	const padRight = 50;
 
 	// svg
-	const svg = d3.select('#svg-container').append('svg')
-		.attr("height", h)
-		.attr("width", w);
+	const svg = d3.select('#svg-container')
+		.append('svg')
+			.attr("height", h)
+			.attr("width", w);
 	
 	// tooltip
 	const tooltip = d3.select("body")
 		.append("div")
-		.attr("id", "tooltip")
-		.style("opacity", 0);
+			.attr("id", "tooltip")
+			.style("opacity", 0);
 
 	// scales
 	const timeParser = d3.timeParse("%Y-%m-%d");
 	const xDomain = [d3.min(data, d => timeParser(d[0])), timeParser("2015-10-01")];
 	const xScale = d3.scaleTime()
 		.domain(xDomain)
-		.range([0, w - padding*2])
+		.range([0, w - padLeft - padRight])
 	const yScale = d3.scaleLinear()
 		.domain([0, d3.max(data, d => d[1])])
-		.range([h - padding*2, 0])
+		.range([h - padTop - padBottom, 0])
 
 	// bars
 	const bars = svg.selectAll("rect")
@@ -63,9 +67,9 @@ function visualizeData(data, height = 450, width = 900) {
 	bars.attr("class", "bar")
 		.attr("data-date", d => d[0])
 		.attr("data-gdp", d => d[1])
-		.attr("x", d => padding + xScale(timeParser(d[0])))
-		.attr("y", d => padding + yScale(d[1]))
-		.attr("height", d => h - padding*2 - yScale(d[1]))
+		.attr("x", d => padLeft + xScale(timeParser(d[0])))
+		.attr("y", d => padTop + yScale(d[1]))
+		.attr("height", d => h - padTop - padBottom - yScale(d[1]))
 		.attr("width", d => {
 			const ci = data.indexOf(d);
 			const initialPoint = xScale(timeParser(d[0]));
@@ -81,8 +85,9 @@ function visualizeData(data, height = 450, width = 900) {
 			tooltip
 				.html(`${date}<br>$ ${gdp} Billion`)
 				.attr("data-date", d[0])
-				.style("opacity", 1)
-			// console.log('mouseover', d[0]);
+				.style("visibility", "visible")
+				.style("opacity", 0.9)
+				.style("border-radius", "3px")
 		})
 		.on("mousemove", () => {
 			const x = d3.event.pageX;
@@ -90,27 +95,43 @@ function visualizeData(data, height = 450, width = 900) {
 			tooltip
 				.style("left", x + 10 + "px")
 				.style("top", y - 20 + "px");
-			// console.log('mousemove', 'x:', x, 'y:', y);
 		})
 		.on("mouseout", () => {
 			tooltip
-				.style("opacity", 0)
+				.style("visibility", "hidden")
+				// .style("top", 0)
+				// .style("left", 0)
 		})
 
 	// axes
 	const xAxis = d3.axisBottom(xScale)
 	svg.append("g")
 		.attr("id", "x-axis")
-		.attr("transform", `translate(${padding}, ${h - padding})`)
+		.attr("transform", `translate(${padLeft}, ${h - padBottom})`)
 		.call(xAxis);
 	const yAxis = d3.axisLeft(yScale);
 	svg.append("g")
 		.attr("id", "y-axis")
-		.attr("transform", `translate(${padding}, ${padding})`)
+		.attr("transform", `translate(${padLeft}, ${padTop})`)
 		.call(yAxis);
+
+	// label
+	const labelGDP = svg.append("text")
+		.text("Gross Domestic Product")
+		.attr("class", "label")
+		.attr("text-anchor", "start")
+		.attr("x", -200)
+		.attr("y", 105)
+		.style("transform", "rotate(-90deg)");
+	const link = svg.append("text")
+		.text("More Information: http://www.bea.gov/national/pdf/nipaguid.pdf")
+		.attr("class", "label")
+		.attr("text-anchor", "start")
+		.attr("x", 520)
+		.attr("y", 450);
 }
 
-
+// More Information: http://www.bea.gov/national/pdf/nipaguid.pdf
 
 
 // MAIN: run data request after source files are loaded

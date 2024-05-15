@@ -20,6 +20,10 @@ This is the reference for visualizing **temporal dates** in this project: [refer
 
 - **ticks** [ref](https://ghenshaw-work.medium.com/customizing-axes-in-d3-js-99d58863738b)
 
+- **tooltip** [ref](https://gramener.github.io/d3js-playbook/tooltips.html)
+
+- axes **label** [ref](https://d3-graph-gallery.com/graph/custom_axis.html)
+
 ## D3 Library
 D3 works on all browsers except IE8 and lower. [Reference](https://www.tutorialsteacher.com/d3js/setup-d3js-development-environment).
 
