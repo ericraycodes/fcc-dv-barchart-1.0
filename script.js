@@ -123,7 +123,8 @@ function visualizeData(data, height = 500, width = 950) {
 		.attr("x", -200)
 		.attr("y", 105)
 		.style("transform", "rotate(-90deg)");
-	const link = svg.append("text")
+	// More Information: http://www.bea.gov/national/pdf/nipaguid.pdf
+	const info = svg.append("text")
 		.text("More Information: http://www.bea.gov/national/pdf/nipaguid.pdf")
 		.attr("class", "label")
 		.attr("text-anchor", "start")
@@ -131,7 +132,6 @@ function visualizeData(data, height = 500, width = 950) {
 		.attr("y", 450);
 }
 
-// More Information: http://www.bea.gov/national/pdf/nipaguid.pdf
 
 
 // MAIN: run data request after source files are loaded
